@@ -9,8 +9,7 @@ Dynamiser cette page web:
 
 ## Pour aller plus loin ##
 
-- Utilisez handlebars.js ! 
-- Récupérez la liste des plats via AJAX à cette adresse: https://wt-902485dbb4fca4fccee3a0efcde5b34c-0.run.webtask.io/foodmenu
+Utilisez [handlebars.js](http://handlebarsjs.com/) pour créer le contenu dynamiquement au lieu de `.append()`
 
 
 

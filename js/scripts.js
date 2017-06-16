@@ -1,14 +1,19 @@
 var source   = $("#row-template").html();
 var template = Handlebars.compile(source);
 
-var $loader = $(".loader");
+var $loader = $(".overlay");
 var $total = $("tr.info");
 
 $.getJSON("https://wt-902485dbb4fca4fccee3a0efcde5b34c-0.run.webtask.io/foodmenu")
 .done(function(meals){
-	$loader.hide();
+	//juste histoire que le loader reste affiché un peu plus longtemps ^^
+	setTimeout(function(){
+		$loader.hide();
+		
+	},500);
 	var html = template(meals);
-	$total.before(html);
+		$total.before(html);
+	
 })
 .fail(function(){
 	alert("Une erreur serveur est survenue");

@@ -27,6 +27,23 @@
                     <th>Quantity</th>
                     <th></th>
                 </tr>
+                <!-- 
+                    <tr data-price="0" data-quantity="0">
+                        <td>
+                            <strong>Super buger</strong>
+                                &nbsp;<img src="img/vege-icon.png">
+                            <p>Super description/p>
+                        </td>
+                        <td>
+                            <span class="price"><strong>0 €</strong></span>
+                        </td>
+                        <td class="quantity">0</td>
+                        <td>
+                            <button class="btn btn-primary more">+</button>
+                            <button class="btn btn-primary less">-</button>
+                        </td>
+                    </tr>
+                -->
                 <tr class="info" data-price="0" data-quantity="0">
                      <td>
                         <strong>Total</strong>
@@ -43,30 +60,8 @@
 	</div>
 </div>
 
-<script id="row-template" type="text/x-handlebars-template">
-    {{#each this}}
-    <tr data-price="{{price}}" data-quantity="0">
-        <td>
-            <strong>{{name}}</strong>
-            {{#if veggie}}
-                &nbsp;<img src="img/vege-icon.png">
-            {{/if}}
-            <p>{{description}}</p>
-        </td>
-        <td>
-            <span class="price"><strong>{{price}} €</strong></span>
-        </td>
-        <td class="quantity">0</td>
-        <td>
-            <button class="btn btn-primary more">+</button>
-            <button class="btn btn-primary less">-</button>
-        </td>
-    </tr>
-    {{/each}}
-</script>
 
     <script src="js/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
   </body>

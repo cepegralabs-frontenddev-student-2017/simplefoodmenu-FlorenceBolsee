@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="FoodMenu">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,44 +14,42 @@
     <link href="css/style.css" rel="stylesheet">
 
   </head>
-  <body>
-    <div class="overlay"><img src="img/loading.gif"/></div>
+  <body ng-controller="MenuController as mc">
+    <div class="overlay" ng-show="!mc.loaded"><img src="img/loading.gif"/ ></div>
     <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<h1>My little food shop</h1>
-			<table class="table" id="meals">
+			<table class="table" id="meals" >
                 <tr>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th></th>
                 </tr>
-                <!-- 
-                    <tr data-price="0" data-quantity="0">
-                        <td>
-                            <strong>Super buger</strong>
-                                &nbsp;<img src="img/vege-icon.png">
-                            <p>Super description/p>
-                        </td>
-                        <td>
-                            <span class="price"><strong>0 €</strong></span>
-                        </td>
-                        <td class="quantity">0</td>
-                        <td>
-                            <button class="btn btn-primary more">+</button>
-                            <button class="btn btn-primary less">-</button>
-                        </td>
-                    </tr>
-                -->
-                <tr class="info" data-price="0" data-quantity="0">
+                <tr ng-repeat="meal in mc.meals">
+                    <td>
+                        <strong>{{meal.name}}</strong>
+                        <span ng-if="meal.veggie">&nbsp;<img src="img/vege-icon.png"></span>
+                        <p>{{meal.description}}</p>
+                    </td>
+                    <td>
+                        <span class="price"><strong>{{meal.price}} €</strong></span>
+                    </td>
+                    <td class="quantity">{{meal.quantity}}</td>
+                    <td>
+                        <button class="btn btn-primary more" ng-click="mc.increment(meal)">+</button>
+                        <button class="btn btn-primary less" ng-click="mc.decrement(meal)">-</button>
+                    </td>
+                </tr>
+                <tr class="info">
                      <td>
                         <strong>Total</strong>
                      </td>
                      <td>
-                        <span class="price"><strong>0 €</strong></span>
+                        <span class="price"><strong>{{mc.totalPrice}} €</strong></span>
                     </td>
-                    <td class="quantity">0</td>
+                    <td class="quantity">{{mc.totalQuantity}}</td>
                     <td>
                     </td>
                 </tr>
@@ -61,8 +59,7 @@
 </div>
 
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="js/scripts.js"></script>
   </body>
 </html>

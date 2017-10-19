@@ -15,45 +15,35 @@ var meals = [{
   veggie: false
 }];
 
-
-var td3 = "<td class=\"quantity\">0</td><td><button class=\"btn btn-primary more\">+</button><button class=\"btn btn-primary less\">-</button></td>";
+var source   = $("#row-template").html();
+var template = Handlebars.compile(source);
 
 var price = 0;
 var quantityTotal = 0;
 var existingTr = $("tr.info");
+var thisMeal = template(meals);
+var max = 100;
 
-function genmeal (text, description, price){
-  var td1 = "<td><strong>" + text + "</strong><p>" + description + "</p></td>";
-  var td2 = "<td><span class=\"price\"><strong>" + price + " €</strong></span></td>";
-  return $("<tr>").attr({"data-price": price, "data-quantity": "0"}).append(td1, td2, td3);
-}
+$("table").append(thisMeal, existingTr);
 
-function genmealVeggie (text, description, price){
-  var td1 = "<td><strong>" + text + "</strong>&nbsp;<img src=\"img/vege-icon.png\"><p>" + description + "</p></td>";
-  var td2 = "<td><span class=\"price\"><strong>" + price + " €</strong></span></td>";
-  return $("<tr>").attr({"data-price": price, "data-quantity": "0"}).append(td1, td2, td3);
-}
-
-
-
-for (i = 0; i < meals.length; i++){
-  if(meals[i].veggie == true){
-    var thisMeal = genmealVeggie (meals[i].text, meals[i].description, meals[i].price);
-  } else {
-    var thisMeal = genmeal (meals[i].text, meals[i].description, meals[i].price);
+$(document).ready(
+  function(){
+    $(".overlay").fadeOut("slow");
   }
-  $("table").append(thisMeal, existingTr);
-}
+);
+
 
 $(".more").click(
   function(){
-    quantityTotal += 1;
-    var quantity = $(this).closest("tr").data("quantity") +1;
-    $(this).closest("tr").data("quantity", quantity);
-    $(this).parent().prev().text($(this).closest("tr").data("quantity"));
-    price += $(this).closest("tr").data("price");
-    $(".info .price").text(price + " €");
-    $(".info .quantity").text(quantityTotal);
+    if(quantityTotal < max) {
+      quantityTotal += 1;
+      var quantity = $(this).closest("tr").data("quantity") +1;
+      $(this).closest("tr").data("quantity", quantity);
+      $(this).parent().prev().text($(this).closest("tr").data("quantity"));
+      price += $(this).closest("tr").data("price");
+      $(".info .price").text(price + " €");
+      $(".info .quantity").text(quantityTotal);
+    }
   }
 );
 
@@ -68,11 +58,5 @@ $(".less").click(
       $(".info .price").text(price + " €");
       $(".info .quantity").text(quantityTotal);
     }
-  }
-);
-
-$(document).ready(
-  function(){
-    $(".overlay").fadeOut("slow");
   }
 );
